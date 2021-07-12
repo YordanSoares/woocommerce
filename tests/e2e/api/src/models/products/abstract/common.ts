@@ -3,9 +3,9 @@ import { ModelID } from '../../model';
 import {
 	CatalogVisibility,
 	ProductTerm,
-	ProductLinks,
 	ProductAttribute,
 } from '../shared';
+import { ObjectLinks } from '../../shared-types';
 
 /**
  * The common parameters that all products can use in search.
@@ -26,6 +26,14 @@ export const baseProductURL = () => '/wc/v3/products/';
  * @return {string} RESTful Url.
  */
 export const buildProductURL = ( id: ModelID ) => baseProductURL() + id;
+
+/**
+ * A common delete product URL builder.
+ *
+ * @param {ModelID} id the id of the product.
+ * @return {string} RESTful Url.
+ */
+export const deleteProductURL = ( id: ModelID ) => buildProductURL( id ) + '?force=true';
 
 /**
  * The base for all product types.
@@ -137,11 +145,11 @@ export abstract class AbstractProduct extends AbstractProductData {
 	public readonly attributes: readonly ProductAttribute[] = [];
 
 	/**
-	 * The products links.
+	 * The product's links.
 	 *
-	 * @type {ReadonlyArray.<ProductLinks>}
+	 * @type {ReadonlyArray.<ObjectLinks>}
 	 */
-	public readonly links: ProductLinks = {
+	public readonly links: ObjectLinks = {
 		collection: [ { href: '' } ],
 		self: [ { href: '' } ],
 	};

@@ -23,7 +23,11 @@ Each project will have its own begin test state and initialization script. For e
 wp core install --url=http://localhost:8084 --admin_user=admin --admin_password=password --admin_email=wooadmin@example.org
 wp plugin activate woocommerce
 wp theme install twentynineteen --activate
-wp user create customer customer@woocommercecoree2etestsuite.com --user_pass=password --role=customer
+wp user create customer customer@woocommercecoree2etestsuite.com \
+	--user_pass=password \
+	--role=subscriber \
+	--first_name='Jane' \
+	--last_name='Smith'
 ```
 
 ### Test Sequencer Setup
@@ -66,7 +70,7 @@ version: ~> 1.0
 script:
   - npm install jest --global
 # add your initialization script here
-  - npm explore @woocommerce/e2e-environment -- npm run test:e2e
+  - npx wc-e2e test:e2e
 
 ....
 
